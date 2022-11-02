@@ -6,8 +6,8 @@ namespace MyFrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly DaprClient _daprClient;
         private readonly ILogger<IndexModel> _logger;
+        private readonly DaprClient _daprClient;
 
         public IndexModel(ILogger<IndexModel> logger, DaprClient daprClient)
         {
@@ -22,7 +22,7 @@ namespace MyFrontEnd.Pages
                 "MyBackEnd",
                 "weatherforecast");
 
-            ViewData["WeatherForecaseData"] = forecasts;
+            ViewData["WeatherForecastData"] = forecasts;
         }
     }
 }

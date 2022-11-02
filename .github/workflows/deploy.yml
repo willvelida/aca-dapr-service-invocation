@@ -79,7 +79,7 @@ jobs:
     needs: deploy-acr-bicep
     defaults:
       run:
-        working-directory: './src/DaprServiceInvocation/MyBackEnd'
+        working-directory: './src/MyBackEnd'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -119,7 +119,7 @@ jobs:
     needs: deploy-acr-bicep
     defaults:
       run:
-        working-directory: './src/DaprServiceInvocation/MyFrontEnd'
+        working-directory: './src/MyFrontEnd'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
