@@ -19,7 +19,7 @@ namespace MyFrontEnd.Pages
         {
             var forecasts = await _daprClient.InvokeMethodAsync<IEnumerable<WeatherForecast>>(
                 HttpMethod.Get,
-                "MyBackEnd",
+                "mybackend",
                 "weatherforecast");
 
             ViewData["WeatherForecastData"] = forecasts;

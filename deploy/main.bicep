@@ -19,8 +19,8 @@ param frontendImage string
 @description('The image name of the back-end service')
 param backendImage string
 
-var frontendName = 'MyFrontEnd'
-var backendName = 'MyBackEnd'
+var frontendName = 'myfrontend'
+var backendName = 'mybackend'
 
 var tags = {
   DemoName: 'ACA-Dapr-Service-Invocation-Demo'
