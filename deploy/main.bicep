@@ -93,6 +93,7 @@ resource frontend 'Microsoft.App/containerApps@2022-06-01-preview' = {
         enabled: true
         appPort: 80
         appId: frontendName
+        enableApiLogging: true
       }
       secrets: [
         {
@@ -154,6 +155,7 @@ resource backend 'Microsoft.App/containerApps@2022-06-01-preview' = {
         enabled: true
         appPort: 80
         appId: backendName
+        enableApiLogging: true
       }
       secrets: [
         {
