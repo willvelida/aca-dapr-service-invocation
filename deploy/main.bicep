@@ -117,7 +117,7 @@ resource frontend 'Microsoft.App/containerApps@2022-06-01-preview' = {
     template: {
       containers: [
         {
-          image: ''
+          image: 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
           name: frontendName
           env: [
             {
@@ -179,7 +179,7 @@ resource backend 'Microsoft.App/containerApps@2022-06-01-preview' = {
     template: {
       containers: [
         {
-          image: ''
+          image: 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
           name: backendName
           env: [
             {
