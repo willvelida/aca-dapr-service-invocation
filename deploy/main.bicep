@@ -13,12 +13,6 @@ param appInsightsName string = 'appins${uniqueString(resourceGroup().id)}'
 @description('The name of the Container App Environment')
 param containerEnvironmentName string = 'env${uniqueString(resourceGroup().id)}'
 
-@description('The image name of the front-end service')
-param frontendImage string
-
-@description('The image name of the back-end service')
-param backendImage string
-
 var frontendName = 'myfrontend'
 var backendName = 'mybackend'
 
@@ -112,7 +106,7 @@ resource frontend 'Microsoft.App/containerApps@2022-06-01-preview' = {
     template: {
       containers: [
         {
-          image: frontendImage
+          image: ''
           name: frontendName
           env: [
             {
@@ -174,7 +168,7 @@ resource backend 'Microsoft.App/containerApps@2022-06-01-preview' = {
     template: {
       containers: [
         {
-          image: backendImage
+          image: ''
           name: backendName
           env: [
             {
