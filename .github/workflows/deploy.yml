@@ -4,79 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint-acr-bicep:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Sign into Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Lint Bicep
-        uses: Azure/cli@v1
-        with:
-          inlineScript: |
-            az bicep build --file ./deploy/containerRegistry.bicep
-
-  validate-acr-bicep:
-    needs: lint-acr-bicep
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Sign into Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Run preflight validation
-        uses: azure/arm-deploy@v1
-        with:
-          deploymentName: ${{ github.run_number }}
-          resourceGroupName: ${{ secrets.AZURE_RG }}
-          template: ./deploy/containerRegistry.bicep
-          deploymentMode: Validate
-
-  preview-acr-bicep:
-    needs: validate-acr-bicep
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: azure/login@v1
-        name: Sign into Azure
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - uses: Azure/cli@v1
-        name: Run what-if
-        with:
-          inlineScript: |
-            az deployment group what-if --resource-group ${{ secrets.AZURE_RG }} --template-file ./deploy/containerRegistry.bicep
-
-  deploy-acr-bicep:
-    runs-on: ubuntu-latest
-    environment: Production
-    needs: preview-acr-bicep
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Sign into Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deploy Bicep Template
-        uses: azure/arm-deploy@v1
-        with:
-          deploymentName: ${{ github.run_number }}
-          resourceGroupName: ${{ secrets.AZURE_RG }}
-          template: ./deploy/containerRegistry.bicep
-          deploymentMode: Incremental
-
   lint:
     runs-on: ubuntu-latest
-    needs: [build-backend-image, build-frontend-image]
     steps:
       - uses: actions/checkout@v2
 

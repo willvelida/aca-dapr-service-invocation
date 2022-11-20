@@ -48,8 +48,19 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
+resource containerRegistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' = {
   name: containerRegistryName
+  location: location
+  tags: tags
+  sku: {
+    name: 'Basic'
+  }
+  properties: {
+    adminUserEnabled: true
+  }
+  identity: {
+    type: 'SystemAssigned'
+  }
 }
 
 resource env 'Microsoft.App/managedEnvironments@2022-06-01-preview' = {
